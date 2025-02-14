@@ -93,14 +93,4 @@ Training Code (inside `train_model.py`):
 ```python
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
-```
-
----
-
-## 🚀 Future Enhancements
-
-🔹 **Improve Model Accuracy** – Enhance dataset quality and explore **Deep Learning** models.
-
-🔹 **User Feedback System** – Allow users to report incorrect classifications.
-
-🔹 **Cloud Deployment** – Host the project on **AWS/GCP** for public access.
+ 
