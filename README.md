@@ -47,45 +47,13 @@ cd fake-news-detection
 
 ### **2️⃣ Backend Setup (Flask & ML Model)**
 ```bash
-cd backend
+ 
 pip install -r requirements.txt
 python app.py
 ```
 ➡ The Flask server will start at `http://127.0.0.1:5000/`
 
-### **3️⃣ Frontend Setup (React)**
-```bash
-cd frontend
-npm install
-npm start
-```
-➡ The React frontend will run at `http://localhost:3000/`
-
----
-
-## 📡 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|------------|
-| `POST` | `/predict` | Takes news text and returns prediction & confidence score. |
-
-Example Request:
-```json
-{
-  "text": "Breaking news: Scientists discover AI that writes perfect READMEs!"
-}
-```
-
-Example Response:
-```json
-{
-  "prediction": "FAKE",
-  "confidence": 92.5
-}
-```
-
----
-
+ 
 ## 🎓 Model Training
 The machine learning model is trained using **TF-IDF Vectorization** and **Logistic Regression** with a dataset of real and fake news articles.
 
