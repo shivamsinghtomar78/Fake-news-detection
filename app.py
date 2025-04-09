@@ -7,17 +7,17 @@ from nltk.stem.porter import PorterStemmer
 import pickle
 import nltk
 
-# Download required NLTK data
+ 
 nltk.download('stopwords')
 
-# Initialize Flask app
+ 
 app = Flask(__name__)
 
-# Configure logging
+ 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Load the trained model and vectorizer
+  
 def load_model():
     """
     Load the trained model and vectorizer from the pickle file.
@@ -36,7 +36,7 @@ def load_model():
         logger.error(f"Error loading model: {str(e)}")
         raise
 
-# Cache the model and vectorizer
+ 
 model, vectorizer = load_model()
 
 def preprocess_text(text):
@@ -44,15 +44,15 @@ def preprocess_text(text):
     Preprocess the input text using stemming and stopword removal.
     """
     port_stem = PorterStemmer()
-    # Remove special characters and numbers
+    
     text = re.sub('[^a-zA-Z]', ' ', text)
-    # Convert to lowercase
+  
     text = text.lower()
-    # Split into words
+   
     words = text.split()
-    # Remove stopwords and apply stemming
+    
     words = [port_stem.stem(word) for word in words if word not in stopwords.words('english')]
-    # Join words back together
+   
     return ' '.join(words)
 
 @app.route('/')
@@ -62,35 +62,33 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # Get input values
+       
         title = request.form.get('title', '').strip()
         author = request.form.get('author', '').strip()
         
         if not title or not author:
             return render_template('index.html', error="Title and author fields cannot be empty.")
         
-        # Combine author and title
+       
         news_text = f"{author} {title}"
         
-        # Preprocess the text
+       
         processed_text = preprocess_text(news_text)
-        
-        # Vectorize using the fitted vectorizer
+         
         vectorized_text = vectorizer.transform([processed_text])
         
-        # Make prediction
+       
         prediction = model.predict(vectorized_text)
         prediction_proba = model.predict_proba(vectorized_text)[0]
         
-        # Get confidence score
+       
         confidence = prediction_proba[1] if prediction[0] == 1 else prediction_proba[0]
         
-        # Prepare output
+     
         result = "FAKE" if prediction[0] == 1 else "REAL"
         explanation = explain_prediction(processed_text, vectorized_text)
         reliable_sources = get_reliable_sources(title)
-        
-        # Redirect to the result page with the prediction data
+         
         return redirect(url_for('result', 
                                result=result, 
                                confidence=f"{confidence:.2%}", 
@@ -103,7 +101,7 @@ def predict():
 
 @app.route('/result')
 def result():
-    # Retrieve the prediction data from the URL parameters
+    
     result = request.args.get('result')
     confidence = request.args.get('confidence')
     explanation = request.args.get('explanation')
@@ -119,14 +117,14 @@ def explain_prediction(text, vectorized_text):
     """
     Explain the model's prediction using SHAP or LIME.
     """
-    # Placeholder for explanation logic
+     
     return "The prediction is based on keywords like 'scam', 'hoax', and 'fake' in the title."
 
 def get_reliable_sources(title):
     """
     Fetch reliable sources or fact-checking articles related to the news title.
     """
-    # Placeholder for fetching reliable sources
+    
     return [
         {"source": "FactCheck.org", "url": "https://www.factcheck.org/"},
         {"source": "Snopes", "url": "https://www.snopes.com/"}
