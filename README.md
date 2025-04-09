@@ -41,7 +41,7 @@ A **Machine Learning-powered** web application that detects **fake news** using 
 
 ### **1️⃣ Clone the Repository**
 ```bash
-git clone https://github.com/your-username/fake-news-detection.git
+git clone https://github.com/shivamsinghtomar78/Fake-news-detection.git
 cd fake-news-detection
 ```
 
