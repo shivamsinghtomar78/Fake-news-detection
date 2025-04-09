@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
     <style>
-        /* Preloader Styles */
+       
         .preloader {
             position: fixed;
             top: 0;
@@ -67,7 +67,7 @@
             50% { opacity: 0.5; }
         }
 
-        /* Rest of your CSS styles */
+        
         :root {
             --gradient-primary: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
             --gradient-secondary: linear-gradient(135deg, #FF6B6B 0%, #FF0000 100%);
@@ -86,7 +86,7 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark Mode Variables */
+        
         [data-theme="dark"] {
             --background-color: #1E1E1E;
             --card-background: rgba(40, 40, 40, 0.95);
@@ -116,7 +116,7 @@
             overflow-x: hidden;
         }
 
-        /* Dark Mode Toggle Switch */
+     
         .theme-switch {
             position: fixed;
             top: 20px;
@@ -153,7 +153,7 @@
             content: '☀️';
         }
 
-        /* Background Floating Elements */
+        
         body::before, body::after {
             content: '';
             position: absolute;
@@ -279,13 +279,13 @@
     </style>
 </head>
 <body>
-    <!-- Preloader -->
+    
     <div class="preloader">
         <div class="spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
 
-    <!-- Dark Mode Toggle Switch -->
+   
     <div class="theme-switch">
         <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
         <label for="theme-toggle" role="switch" aria-checked="false"></label>
@@ -297,31 +297,30 @@
             <p>Prediction Result</p>
         </div>
 
-        <!-- Prediction Result -->
+        
         <div class="result {% if result == 'FAKE' %}fake{% else %}real{% endif %}">
             The news is <strong>{{ result }}</strong> (Confidence: {{ confidence }})
         </div>
     </div>
 
     <script>
-        // Hide preloader when the page is fully loaded
+       
         window.addEventListener('load', () => {
             const preloader = document.querySelector('.preloader');
             preloader.classList.add('hide');
         });
 
-        // Dark Mode Functionality
+        
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
-        // Load saved theme preference
+       
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             body.setAttribute('data-theme', 'dark');
             themeToggle.checked = true;
         }
-
-        // Toggle theme and save preference
+ 
         themeToggle.addEventListener('change', () => {
             const isDarkMode = themeToggle.checked;
             body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
